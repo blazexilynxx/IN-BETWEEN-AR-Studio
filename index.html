@@ -132,9 +132,9 @@
   <div class="viewer-container">
 
     <model-viewer
-      id="mannequin"
-      src="mannequin1.glb"
-      alt="Grazia 3D Fashion Mannequin"
+      id="look"
+      src="look01.glb"
+      alt="Grazia 3D Fashion Look 01"
       camera-controls
       auto-rotate
       rotation-per-second="15deg"
@@ -151,18 +151,18 @@
 
   <div class="buttons">
 
-    <button id="model1"
+    <button id="look01"
       class="active"
       onclick="changeModel('look01.glb', this)">
       LOOK 01
     </button>
 
-    <button id="model2"
+    <button id="look02"
       onclick="changeModel('look02.glb', this)">
       LOOK 02
     </button>
 
-    <button id="model3"
+    <button id="look03"
       onclick="changeModel('look03.glb', this)">
       LOOK 03
     </button>
@@ -181,7 +181,7 @@
 
     function changeModel(file, button) {
 
-      const viewer = document.getElementById("mannequin");
+      const viewer = document.getElementById("look");
 
       viewer.src = file;
 
