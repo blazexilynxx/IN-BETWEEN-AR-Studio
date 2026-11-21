@@ -1,42 +1,116 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>Grazia Styling Studio</title>
 
+  <!-- 3D Model Viewer -->
   <script type="module"
     src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
   </script>
 
   <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
+      background: #f5f3ef;
+      color: #252525;
       font-family: Arial, sans-serif;
-      background: #f5f2ed;
-      color: #222;
       text-align: center;
     }
 
     header {
-      padding: 25px;
-      letter-spacing: 4px;
-      font-size: 22px;
-      font-weight: bold;
+      padding: 25px 15px 10px;
+      font-family: Georgia, serif;
+      font-size: 32px;
+      letter-spacing: 5px;
     }
 
-    p {
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+    }
+
+    .heading {
+      font-family: Georgia, serif;
+      font-size: 25px;
+      margin: 25px 10px 8px;
+    }
+
+    .description {
       font-size: 13px;
-      letter-spacing: 1px;
+      color: #777;
+      margin: 10px 15px 20px;
+    }
+
+    .viewer-container {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      padding: 0 15px;
     }
 
     model-viewer {
       width: 100%;
-      height: 70vh;
-      background: #f5f2ed;
+      height: 550px;
+      background: #eeece7;
+      border-radius: 5px;
+      --poster-color: #eeece7;
     }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 25px 10px;
+    }
+
+    button {
+      padding: 13px 25px;
+      border: 1px solid #333;
+      background: transparent;
+      color: #333;
+      cursor: pointer;
+      letter-spacing: 1px;
+      font-size: 11px;
+    }
+
+    button.active,
+    button:hover {
+      background: #292929;
+      color: white;
+    }
+
+    .instructions {
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 1px;
+      margin: 20px;
+    }
+
+    footer {
+      padding: 25px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      model-viewer {
+        height: 450px;
+      }
+    }
+
   </style>
 </head>
 
@@ -44,28 +118,76 @@
 
   <header>GRAZIA</header>
 
-  <p>STYLING STUDIO — SS2027</p>
+  <div class="subtitle">
+    STYLING STUDIO · SS2027
+  </div>
 
-  <p>Explore your look in 3D and AR</p>
+  <h2 class="heading">Explore in 360°</h2>
 
-  <model-viewer
-    src="mannequin.glb"
-    alt="3D fashion mannequin"
-    camera-controls
-    auto-rotate
-    ar
-    ar-modes="webxr scene-viewer quick-look"
-    ar-placement="floor"
-    shadow-intensity="1"
-    exposure="1">
+  <p class="description">
+    Discover the mannequin from every angle.
+    Rotate and explore the 3D model.
+  </p>
 
-    <button slot="ar-button">
-      View in Your Space
+  <div class="viewer-container">
+
+    <model-viewer
+      id="mannequin"
+      src="mannequin1.glb"
+      alt="Grazia 3D Fashion Mannequin"
+      camera-controls
+      auto-rotate
+      rotation-per-second="15deg"
+      camera-orbit="0deg 75deg auto"
+      min-camera-orbit="auto 75deg auto"
+      max-camera-orbit="auto 75deg auto"
+      shadow-intensity="1"
+      exposure="1"
+      interaction-prompt="auto"
+      loading="eager">
+    </model-viewer>
+
+  </div>
+
+  <div class="buttons">
+
+    <button id="model1"
+      class="active"
+      onclick="changeModel('mannequin1.glb', this)">
+      MANNEQUIN 01
     </button>
 
-  </model-viewer>
+    <button id="model2"
+      onclick="changeModel('mannequin2.glb', this)">
+      MANNEQUIN 02
+    </button>
 
-  <p>Rotate • Explore • Experience</p>
+  </div>
+
+  <p class="instructions">
+    DRAG TO ROTATE · SCROLL TO ZOOM
+  </p>
+
+  <footer>
+    GRAZIA MALAYSIA · IN BETWEEN · SS2027
+  </footer>
+
+  <script>
+
+    function changeModel(file, button) {
+
+      const viewer = document.getElementById("mannequin");
+
+      viewer.src = file;
+
+      document.querySelectorAll(".buttons button")
+        .forEach(btn => btn.classList.remove("active"));
+
+      button.classList.add("active");
+
+    }
+
+  </script>
 
 </body>
 </html>
